@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CareerFit Resume Matcher</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>CareerFit Resume Matcher</h1>
+            <p class="subtitle">Compare a resume with a role description and review matching skills and areas to develop.</p>
+        </header>
+
+        <form method="POST" enctype="multipart/form-data" class="analyzer-form">
+            <div class="form-group">
+                <label for="job_description">Job Description</label>
+                <textarea id="job_description" name="job_description" rows="8"
+                    placeholder="Paste the job description here...">{{ request.form.get('job_description', '') }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="resume">Resume (.pdf or .docx)</label>
+                <input type="file" id="resume" name="resume" accept=".pdf,.docx" required>
+            </div>
+
+            <button type="submit" class="btn-analyze">Analyze</button>
+        </form>
+
+        {% if result %}
+            {% if result.error %}
+                <div class="card error-card">
+                    <p>{{ result.error }}</p>
+                </div>
+            {% else %}
+                <div class="card score-card">
+                    <h2>Match Score</h2>
+                    <div class="score-circle" style="--score: {{ result.score }};">
+                        <span>{{ result.score }}%</span>
+                    </div>
+                </div>
+
+                <div class="results-grid">
+                    <div class="card">
+                        <h3>✅ Matched Skills</h3>
+                        {% if result.matched_skills %}
+                            <ul class="skill-list matched">
+                                {% for skill in result.matched_skills %}
+                                    <li>{{ skill }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p class="empty">No matching skills found.</p>
+                        {% endif %}
+                    </div>
+
+                    <div class="card">
+                        <h3>⚠️ Missing Skills</h3>
+                        {% if result.missing_skills %}
+                            <ul class="skill-list missing">
+                                {% for skill in result.missing_skills %}
+                                    <li>{{ skill }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p class="empty">No missing skills — great fit!</p>
+                        {% endif %}
+                    </div>
+
+                    <div class="card">
+                        <h3>📄 Skills Found in Resume</h3>
+                        {% if result.resume_skills %}
+                            <ul class="skill-list neutral">
+                                {% for skill in result.resume_skills %}
+                                    <li>{{ skill }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p class="empty">No recognized skills found in resume.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+
+</body>
+</html>

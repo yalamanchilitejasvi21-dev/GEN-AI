@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container">
+    <header>
+        <h1>Generate Content</h1>
+        <p class="subtitle">Create blog posts and social media content, grounded in your past generations.</p>
+    </header>
+
+    <form id="generate-form" class="generator-form">
+        <div class="form-group">
+            <label for="topic">Topic</label>
+            <input type="text" id="topic" name="topic" placeholder="e.g. Benefits of remote work" required>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="platform">Platform</label>
+                <select id="platform" name="platform" required>
+                    <option value="Blog">Blog</option>
+                    <option value="LinkedIn">LinkedIn</option>
+                    <option value="Twitter/X">Twitter / X</option>
+                    <option value="Instagram">Instagram</option>
+                    <option value="Facebook">Facebook</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="tone">Tone</label>
+                <select id="tone" name="tone" required>
+                    <option value="Professional">Professional</option>
+                    <option value="Casual">Casual</option>
+                    <option value="Humorous">Humorous</option>
+                    <option value="Persuasive">Persuasive</option>
+                    <option value="Inspirational">Inspirational</option>
+                </select>
+            </div>
+        </div>
+
+        <button type="submit" class="btn-generate" id="generate-btn">Generate</button>
+    </form>
+
+    <div id="result-card" class="card result-card hidden">
+        <div class="result-header">
+            <h3>Generated Content</h3>
+            <button type="button" id="copy-btn" class="btn-copy">Copy</button>
+        </div>
+        <div id="result-content" class="result-content"></div>
+    </div>
+
+    <div id="error-card" class="card error-card hidden"></div>
+</div>
+{% endblock %}

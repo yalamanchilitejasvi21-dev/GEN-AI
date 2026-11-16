@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container">
+    <header>
+        <h1>Generation History</h1>
+        <p class="subtitle">Everything you've generated so far, most recent first.</p>
+    </header>
+
+    {% if history %}
+        <div class="history-list">
+            {% for item in history %}
+                <div class="card history-item">
+                    <div class="history-meta">
+                        <span class="tag">{{ item.platform }}</span>
+                        <span class="tag tone-tag">{{ item.tone }}</span>
+                    </div>
+                    <h3>{{ item.topic }}</h3>
+                    <p class="history-content">{{ item.text }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="card">
+            <p class="empty">No content generated yet. Head to the Home page to create your first piece.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
