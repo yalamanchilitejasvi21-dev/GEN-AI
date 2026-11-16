@@ -1,7 +1,7 @@
 # GenAI with LLMs — Project Collection
 
-**Student:** Varsha Reddy  
-**Roll number:** 160125733063
+**Student:** Tejasvi Yalamanchili
+**Roll number:** 160125733060
 
 This copy contains four projects from the supplied collection. The J.A.R.V.I.S. project was omitted as requested. The included projects have updated labels and setup notes, plus focused changes to upload validation, session handling, API-key configuration, input checks, and arithmetic evaluation.
 
